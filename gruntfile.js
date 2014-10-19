@@ -77,13 +77,30 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            options: {
-                beautify: true,
-                mangle: false,
-                sourceMap: true,
-                preserveComments: 'all'
+            dev: {
+                options: {
+                    beautify: true,
+                    mangle: false,
+                    sourceMap: true,
+                    preserveComments: 'all'
+                },
+                src: [
+                    'bower_components/moment/moment.js',
+                    'bower_components/moment/locale/de.js',
+                    'bower_components/moment-duration-format/lib/moment-duration-format.js',
+                    'bower_components/angular/angular.js',
+
+                    'js/src/timeTracker/module.js',
+                    'js/src/timeTracker/momentInputDirective.js',
+                    'js/src/timeTracker/entryRepositoryService.js',
+                    'js/src/timeTracker/calculationService.js',
+                    'js/src/timeTracker/controller.js',
+                    'js/src/timeTracker/entryController.js',
+                    'js/src/app.js'
+                ],
+                dest: 'js/build/app.min.js'
             },
-            build: {
+            prod: {
                 src: [
                     'bower_components/moment/moment.js',
                     'bower_components/moment/locale/de.js',
@@ -104,12 +121,13 @@ module.exports = function (grunt) {
         watch: {
             js: {
                 files: [ 'package.json', 'bower.json', 'gruntfile.js', 'js/src/**/*.js', 'js/test/**/*.js' ],
-                tasks: [ 'js' ]
+                tasks: [ 'js:dev' ]
             }
         }
     });
 
     grunt.registerTask('css', [ 'concat' ]);
-    grunt.registerTask('js', [ 'jshint', 'karma', 'uglify' ]);
-    grunt.registerTask('default', [ 'clean', 'copy', 'css', 'js' ]);
+    grunt.registerTask('js:dev', [ 'jshint', 'karma', 'uglify:dev' ]);
+    grunt.registerTask('js:prod', [ 'jshint', 'karma', 'uglify:prod' ]);
+    grunt.registerTask('default', [ 'clean', 'copy', 'css', 'js:prod' ]);
 };
