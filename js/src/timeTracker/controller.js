@@ -3,9 +3,10 @@
 
     angular.module('timeTracker').controller('timeTrackerController', [
         '$scope',
+        '$interval',
         'timeTrackerEntryRepositoryService',
         'timeTrackerCalculationService',
-        function ($scope, timeTrackerEntryRepository, timeTrackerCalculation) {
+        function ($scope, $interval, timeTrackerEntryRepository, timeTrackerCalculation) {
 
             $scope.timeTrackerEntries = timeTrackerEntryRepository.fetchEntries();
             $scope.projectEntries = timeTrackerCalculation.createProjectEntries($scope.timeTrackerEntries);
@@ -28,5 +29,7 @@
                 $scope.timeTrackerSummaryEntries = timeTrackerCalculation.createTimeTrackerSummaryEntries($scope.timeTrackerEntries);
                 $scope.timeTrackerSummaryDuration = timeTrackerCalculation.createTimeTrackerSummaryDuration($scope.timeTrackerEntries);
             };
+
+            $interval($scope.update, 1000);
         }]);
 })();
