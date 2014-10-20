@@ -9,9 +9,6 @@
         function ($scope, $interval, timeTrackerEntryRepository, timeTrackerCalculation) {
 
             $scope.timeTrackerEntries = timeTrackerEntryRepository.fetchEntries();
-            $scope.projectEntries = timeTrackerCalculation.createProjectEntries($scope.timeTrackerEntries);
-            $scope.timeTrackerSummaryEntries = timeTrackerCalculation.createTimeTrackerSummaryEntries($scope.timeTrackerEntries);
-            $scope.timeTrackerSummaryDuration = timeTrackerCalculation.createTimeTrackerSummaryDuration($scope.timeTrackerEntries);
 
             $scope.appendEmptyTimeTrackerEntry = function () {
                 timeTrackerEntryRepository.appendEmptyEntry();
@@ -23,13 +20,18 @@
                 $scope.update();
             };
 
-            $scope.update = function () {
-                timeTrackerEntryRepository.persist();
+            $scope.calculate = function () {
                 $scope.projectEntries = timeTrackerCalculation.createProjectEntries($scope.timeTrackerEntries);
                 $scope.timeTrackerSummaryEntries = timeTrackerCalculation.createTimeTrackerSummaryEntries($scope.timeTrackerEntries);
                 $scope.timeTrackerSummaryDuration = timeTrackerCalculation.createTimeTrackerSummaryDuration($scope.timeTrackerEntries);
             };
 
-            $interval($scope.update, 1000);
+            $scope.update = function () {
+                timeTrackerEntryRepository.persist();
+                $scope.calculate();
+            };
+
+            $scope.calculate();
+            $interval($scope.calculate, 1000);
         }]);
 })();
