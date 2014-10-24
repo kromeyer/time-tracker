@@ -78,4 +78,16 @@ describe('appMomentInput', function () {
         scope.$digest();
         expect(ngModelController.$valid).toBeFalsy();
     });
+
+    it('should consider alternative formats for parsing', inject(function ($compile, $rootScope) {
+        scope = $rootScope.$new();
+        element = $compile('<input type="text" ng-model="value" app-moment-input="HH:mm:ss|H mm ss">')(scope);
+        ngModelController = element.controller('ngModel');
+
+        ngModelController.$setViewValue('8 56 23');
+        scope.$digest();
+        expect(moment.isMoment(scope.value)).toBeTruthy();
+        expect(scope.value.isValid()).toBeTruthy();
+        expect(scope.value.format('HH:mm:ss')).toBe('08:56:23');
+    }));
 });

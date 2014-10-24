@@ -2,11 +2,13 @@
     'use strict';
 
     angular.module('timeTracker').directive('appMomentInput', function () {
+        var VALIDATION_ERROR_KEY = 'format';
+        var FORMAT_SEPARATOR = '|';
+
         return {
             require: 'ngModel',
             link: function (scope, element, attrs, ngModel) {
-                var VALIDATION_ERROR_KEY = 'format';
-                var format = attrs.appMomentInput;
+                var format = attrs.appMomentInput.split(FORMAT_SEPARATOR);
 
                 ngModel.$formatters.push(function (value) {
                     var isValidMoment = moment.isMoment(value) && value.isValid();
@@ -14,7 +16,7 @@
                     ngModel.$setValidity(VALIDATION_ERROR_KEY, !value || isValidMoment);
 
                     if (isValidMoment) {
-                        return value.format(format);
+                        return value.format(format[0]);
                     }
 
                     return value;

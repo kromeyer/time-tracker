@@ -27,7 +27,7 @@
                        class="form-control"
                        id="startTime"
                        placeholder="Beginn"
-                       app-moment-input="HH:mm"
+                       app-moment-input="HH mm|H mm|H:mm"
                        required
                        ng-model="entry.startTime"
                        ng-change="update()">
@@ -46,7 +46,7 @@
                        class="form-control"
                        id="endTime"
                        placeholder="Ende"
-                       app-moment-input="HH:mm"
+                       app-moment-input="HH mm|H mm|H:mm"
                        required
                        ng-model="entry.endTime"
                        ng-change="update()">
