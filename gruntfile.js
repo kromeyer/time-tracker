@@ -35,7 +35,8 @@ module.exports = function (grunt) {
                 },
                 src: [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css',
-                    'bower_components/bootswatch.com.superhero.css/index.css'
+                    'bower_components/bootswatch.com.superhero.css/index.css',
+                    'css/src/validation.css'
                 ],
                 dest: 'css/build/app.min.css'
             }

@@ -1,0 +1,35 @@
+
+.form-control::-webkit-input-placeholder {
+    color: #2b3e50;
+    opacity: 0.6;
+}
+
+.form-control::-moz-placeholder {
+    color: #2b3e50;
+    opacity: 0.6;
+}
+
+.form-control:-ms-input-placeholder {
+    color: #2b3e50;
+    opacity: 0.6;
+}
+
+.form-control.ng-invalid.ng-touched {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+.form-control.ng-invalid.ng-touched::-webkit-input-placeholder {
+    color: #ffffff;
+    opacity: 0.6;
+}
+
+.form-control.ng-invalid.ng-touched::-moz-placeholder {
+    color: #ffffff;
+    opacity: 0.6;
+}
+
+.form-control.ng-invalid.ng-touched:-ms-input-placeholder {
+    color: #ffffff;
+    opacity: 0.6;
+}
