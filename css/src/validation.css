@@ -14,22 +14,22 @@
     opacity: 0.6;
 }
 
-.form-control.ng-invalid.ng-touched {
+.form-control.ng-invalid:not(:focus) {
     background-color: #d9534f;
     color: #ffffff;
 }
 
-.form-control.ng-invalid.ng-touched::-webkit-input-placeholder {
+.form-control.ng-invalid:not(:focus)::-webkit-input-placeholder {
     color: #ffffff;
     opacity: 0.6;
 }
 
-.form-control.ng-invalid.ng-touched::-moz-placeholder {
+.form-control.ng-invalid:not(:focus)::-moz-placeholder {
     color: #ffffff;
     opacity: 0.6;
 }
 
-.form-control.ng-invalid.ng-touched:-ms-input-placeholder {
+.form-control.ng-invalid:not(:focus):-ms-input-placeholder {
     color: #ffffff;
     opacity: 0.6;
 }
