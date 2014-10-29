@@ -7,7 +7,8 @@
         '$interval',
         'timeTrackerEntryRepositoryService',
         'timeTrackerCalculationService',
-        function ($scope, $window, $interval, timeTrackerEntryRepository, timeTrackerCalculation) {
+        'timeTrackerExportService',
+        function ($scope, $window, $interval, timeTrackerEntryRepository, timeTrackerCalculation, timeTrackerExportService) {
 
             $scope.timeTrackerEntries = timeTrackerEntryRepository.fetchEntries();
 
@@ -22,19 +23,7 @@
             };
 
             $scope.exportSummary = function () {
-                var data = '';
-
-                for (var i = 0; i < $scope.timeTrackerSummaryEntries.length; i++) {
-                    var timeTrackerSummaryEntry = $scope.timeTrackerSummaryEntries[i];
-
-                    data += timeTrackerSummaryEntry.project;
-                    if (timeTrackerSummaryEntry.description) {
-                        data += ': ' + timeTrackerSummaryEntry.description;
-                    }
-                    data += ' (' + timeTrackerSummaryEntry.duration.format('h[h] m[m]') + ')';
-                    data += '\n';
-                }
-
+                var data = timeTrackerExportService.summaryEntriesAsPlainText($scope.timeTrackerSummaryEntries);
                 var dataBase64 = $window.btoa(data);
                 var dataUrl = 'data:text/plain;charset="utf-8";base64,' + dataBase64;
                 $window.open(dataUrl);
