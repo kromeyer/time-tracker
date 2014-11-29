@@ -3,7 +3,7 @@ describe('appMomentInput', function () {
 
     var scope, element, ngModelController;
 
-    beforeEach(module('timeTracker'));
+    beforeEach(module('common'));
     beforeEach(inject(function ($compile, $rootScope) {
         scope = $rootScope.$new();
         element = $compile('<input type="text" ng-model="value" app-moment-input="HH:mm:ss">')(scope);

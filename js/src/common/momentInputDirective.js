@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('timeTracker').directive('appMomentInput', function () {
+    angular.module('common').directive('appMomentInput', function () {
         var VALIDATION_ERROR_KEY = 'format';
         var FORMAT_SEPARATOR = '|';
 

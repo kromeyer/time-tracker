@@ -60,8 +60,9 @@ module.exports = function (grunt) {
 
                         'bower_components/angular-mocks/angular-mocks.js',
 
+                        'js/src/common/module.js',
+                        'js/src/common/momentInputDirective.js',
                         'js/src/timeTracker/module.js',
-                        'js/src/timeTracker/momentInputDirective.js',
                         'js/src/timeTracker/entryRepositoryService.js',
                         'js/src/timeTracker/projectRepositoryService.js',
                         'js/src/timeTracker/calculationService.js',
@@ -92,8 +93,9 @@ module.exports = function (grunt) {
                     'bower_components/moment-duration-format/lib/moment-duration-format.js',
                     'bower_components/angular/angular.js',
 
+                    'js/src/common/module.js',
+                    'js/src/common/momentInputDirective.js',
                     'js/src/timeTracker/module.js',
-                    'js/src/timeTracker/momentInputDirective.js',
                     'js/src/timeTracker/entryRepositoryService.js',
                     'js/src/timeTracker/projectRepositoryService.js',
                     'js/src/timeTracker/calculationService.js',
@@ -110,8 +112,9 @@ module.exports = function (grunt) {
                     'bower_components/moment-duration-format/lib/moment-duration-format.js',
                     'bower_components/angular/angular.js',
 
+                    'js/src/common/module.js',
+                    'js/src/common/momentInputDirective.js',
                     'js/src/timeTracker/module.js',
-                    'js/src/timeTracker/momentInputDirective.js',
                     'js/src/timeTracker/entryRepositoryService.js',
                     'js/src/timeTracker/projectRepositoryService.js',
                     'js/src/timeTracker/calculationService.js',

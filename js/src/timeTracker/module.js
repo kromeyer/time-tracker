@@ -1,5 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('timeTracker', []);
+    angular.module('timeTracker', ['common']);
 })();
