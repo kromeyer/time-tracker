@@ -39,7 +39,7 @@
             window.localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(entries));
         };
 
-        entryRepositoryService.appendEmptyEntry = function () {
+        entryRepositoryService.addEmptyEntry = function () {
             entries.push({
                 id: Date.now(),
                 startTime: now(),
@@ -53,10 +53,10 @@
             return entries;
         };
 
-        entryRepositoryService.removeEntry = function (id) {
+        entryRepositoryService.removeEntry = function (entry) {
             for (var index = 0; index < entries.length; index++) {
-                var entry = entries[index];
-                if (entry.id === id) {
+                var currentEntry = entries[index];
+                if (currentEntry.id === entry.id) {
                     entries.splice(index, 1);
                     break;
                 }

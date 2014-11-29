@@ -22,7 +22,7 @@
             $scope.projectEntries = timeTrackerProjectRepositoryService.fetchEntries();
 
             $scope.appendEmptyTimeTrackerEntry = function () {
-                timeTrackerEntryRepository.appendEmptyEntry();
+                timeTrackerEntryRepository.addEmptyEntry();
                 $scope.calculateSummary();
                 $scope.persist();
             };
@@ -53,7 +53,7 @@
             };
 
             $scope.removeTimeTrackerEntry = function (entry) {
-                timeTrackerEntryRepository.removeEntry(entry.id);
+                timeTrackerEntryRepository.removeEntry(entry);
                 $scope.calculateSummary();
                 $scope.persist();
             };
