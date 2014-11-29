@@ -63,10 +63,10 @@ module.exports = function (grunt) {
                         'js/src/timeTracker/module.js',
                         'js/src/timeTracker/momentInputDirective.js',
                         'js/src/timeTracker/entryRepositoryService.js',
+                        'js/src/timeTracker/projectRepositoryService.js',
                         'js/src/timeTracker/calculationService.js',
                         'js/src/timeTracker/exportService.js',
                         'js/src/timeTracker/controller.js',
-                        'js/src/timeTracker/entryController.js',
                         'js/src/app.js',
 
                         'js/test/**/*.js'
@@ -95,10 +95,10 @@ module.exports = function (grunt) {
                     'js/src/timeTracker/module.js',
                     'js/src/timeTracker/momentInputDirective.js',
                     'js/src/timeTracker/entryRepositoryService.js',
+                    'js/src/timeTracker/projectRepositoryService.js',
                     'js/src/timeTracker/calculationService.js',
                     'js/src/timeTracker/exportService.js',
                     'js/src/timeTracker/controller.js',
-                    'js/src/timeTracker/entryController.js',
                     'js/src/app.js'
                 ],
                 dest: 'js/build/app.min.js'
@@ -113,10 +113,10 @@ module.exports = function (grunt) {
                     'js/src/timeTracker/module.js',
                     'js/src/timeTracker/momentInputDirective.js',
                     'js/src/timeTracker/entryRepositoryService.js',
+                    'js/src/timeTracker/projectRepositoryService.js',
                     'js/src/timeTracker/calculationService.js',
                     'js/src/timeTracker/exportService.js',
                     'js/src/timeTracker/controller.js',
-                    'js/src/timeTracker/entryController.js',
                     'js/src/app.js'
                 ],
                 dest: 'js/build/app.min.js'

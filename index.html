@@ -16,11 +16,10 @@
 
 <form>
     <datalist id="projectList">
-        <option ng-repeat="entry in projectEntries" value="{{entry}}">
+        <option ng-repeat="entry in projectEntries | orderBy:'count':true track by entry.id" value="{{entry.label}}">
     </datalist>
     <div class="row"
-         ng-repeat="entry in timeTrackerEntries track by entry.id"
-         ng-controller="timeTrackerEntryController">
+         ng-repeat="entry in timeTrackerEntries track by entry.id">
         <div class="form-group col-md-2">
             <div class="input-group">
                 <input type="text"
@@ -30,11 +29,12 @@
                        app-moment-input="HH mm|H mm|H:mm"
                        required
                        ng-model="entry.startTime"
-                       ng-change="update()">
+                       ng-change="calculateSummary()"
+                       ng-blur="persist()">
                     <span class="input-group-btn">
                         <button class="btn btn-default"
                                 type="button"
-                                ng-click="setStartTimeToNow()">
+                                ng-click="setStartTimeToNow(entry)">
                             <span class="glyphicon glyphicon-time"></span>
                         </button>
                     </span>
@@ -48,11 +48,12 @@
                        placeholder="Ende"
                        app-moment-input="HH mm|H mm|H:mm"
                        ng-model="entry.endTime"
-                       ng-change="update()">
+                       ng-change="calculateSummary()"
+                       ng-blur="persist()">
                     <span class="input-group-btn">
                         <button class="btn btn-default"
                                 type="button"
-                                ng-click="setEndTimeToNow()">
+                                ng-click="setEndTimeToNow(entry)">
                             <span class="glyphicon glyphicon-time"></span>
                         </button>
                     </span>
@@ -66,7 +67,8 @@
                    list="projectList"
                    required
                    ng-model="entry.project"
-                   ng-change="update()">
+                   ng-change="calculateSummary()"
+                   ng-blur="persistProject(entry.project)">
         </div>
         <div class="form-group col-md-5">
             <input type="text"
@@ -74,12 +76,13 @@
                    id="description"
                    placeholder="Beschreibung"
                    ng-model="entry.description"
-                   ng-change="update()">
+                   ng-change="calculateSummary()"
+                   ng-blur="persist()">
         </div>
         <div class="form-group col-md-1 text-right">
             <button type="button"
                     class="btn btn-danger"
-                    ng-click="removeTimeTrackerEntry()">
+                    ng-click="removeTimeTrackerEntry(entry)">
                 <span class="glyphicon glyphicon-minus"></span>
             </button>
         </div>

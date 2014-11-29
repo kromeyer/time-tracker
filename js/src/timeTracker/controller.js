@@ -6,20 +6,31 @@
         '$window',
         '$interval',
         'timeTrackerEntryRepositoryService',
+        'timeTrackerProjectRepositoryService',
         'timeTrackerCalculationService',
         'timeTrackerExportService',
-        function ($scope, $window, $interval, timeTrackerEntryRepository, timeTrackerCalculation, timeTrackerExportService) {
+        function ($scope, $window, $interval, timeTrackerEntryRepository, timeTrackerProjectRepositoryService, timeTrackerCalculation, timeTrackerExportService) {
+
+            var now = function () {
+                var now = moment();
+                now.second(0);
+                now.millisecond(0);
+                return now;
+            };
 
             $scope.timeTrackerEntries = timeTrackerEntryRepository.fetchEntries();
+            $scope.projectEntries = timeTrackerProjectRepositoryService.fetchEntries();
 
             $scope.appendEmptyTimeTrackerEntry = function () {
                 timeTrackerEntryRepository.appendEmptyEntry();
-                $scope.update();
+                $scope.calculateSummary();
+                $scope.persist();
             };
 
             $scope.reset = function () {
                 timeTrackerEntryRepository.removeAllEntries();
-                $scope.update();
+                $scope.calculateSummary();
+                $scope.persist();
             };
 
             $scope.exportSummary = function () {
@@ -29,18 +40,45 @@
                 $window.open(dataUrl);
             };
 
-            $scope.calculate = function () {
-                $scope.projectEntries = timeTrackerCalculation.createProjectEntries($scope.timeTrackerEntries);
+            $scope.setStartTimeToNow = function (entry) {
+                entry.startTime = now();
+                $scope.calculateSummary();
+                $scope.persist();
+            };
+
+            $scope.setEndTimeToNow = function (entry) {
+                entry.endTime = now();
+                $scope.calculateSummary();
+                $scope.persist();
+            };
+
+            $scope.removeTimeTrackerEntry = function (entry) {
+                timeTrackerEntryRepository.removeEntry(entry.id);
+                $scope.calculateSummary();
+                $scope.persist();
+            };
+
+            $scope.persistProject = function (project) {
+                if (project) {
+                    timeTrackerProjectRepositoryService.addEntryByLabel(project);
+                    timeTrackerProjectRepositoryService.persist();
+                    $scope.projectEntries = timeTrackerProjectRepositoryService.fetchEntries();
+                }
+                $scope.persist();
+            };
+
+            $scope.persist = function () {
+                timeTrackerEntryRepository.persist();
+            };
+
+            $scope.calculateSummary = function () {
                 $scope.timeTrackerSummaryEntries = timeTrackerCalculation.createTimeTrackerSummaryEntries($scope.timeTrackerEntries);
                 $scope.timeTrackerSummaryDuration = timeTrackerCalculation.createTimeTrackerSummaryDuration($scope.timeTrackerEntries);
             };
 
-            $scope.update = function () {
-                timeTrackerEntryRepository.persist();
-                $scope.calculate();
-            };
+            $scope.calculateSummary();
+            $interval($scope.calculateSummary, 1000);
 
-            $scope.calculate();
-            $interval($scope.calculate, 1000);
         }]);
+
 })();
