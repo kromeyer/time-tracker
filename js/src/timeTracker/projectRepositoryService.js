@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('timeTracker').service('timeTrackerProjectRepositoryService', ['PROJECT_PERIOD_OF_VALIDITY', function (PROJECT_PERIOD_OF_VALIDITY) {
+    angular.module('timeTracker').service('timeTrackerProjectRepositoryService', ['momentFromIso8601', 'PROJECT_PERIOD_OF_VALIDITY', function (momentFromIso8601, PROJECT_PERIOD_OF_VALIDITY) {
 
         var LOCAL_STORAGE_NAME = 'PROJECT_ENTRIES';
 
@@ -10,13 +10,10 @@
         var init = function () {
             if (window.localStorage.getItem(LOCAL_STORAGE_NAME)) {
                 entries = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_NAME));
+
                 for (var index = 0; index < entries.length; index++) {
                     var entry = entries[index];
-
-                    var time = moment(entry.time, moment.ISO_8601, true);
-                    if (time.isValid()) {
-                        entry.time = time;
-                    }
+                    entry.time = momentFromIso8601(entry.time);
                 }
             }
         };

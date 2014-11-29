@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('timeTracker').service('timeTrackerEntryRepositoryService', function () {
+    angular.module('timeTracker').service('timeTrackerEntryRepositoryService', ['momentFromIso8601', function (momentFromIso8601) {
 
         var LOCAL_STORAGE_NAME = 'TIME_TRACKER_ENTRIES';
 
@@ -10,18 +10,11 @@
         var init = function () {
             if (window.localStorage.getItem(LOCAL_STORAGE_NAME)) {
                 entries = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_NAME));
+
                 for (var index = 0; index < entries.length; index++) {
                     var entry = entries[index];
-
-                    var startTime = moment(entry.startTime, moment.ISO_8601, true);
-                    if (startTime.isValid()) {
-                        entry.startTime = startTime;
-                    }
-
-                    var endTime = moment(entry.endTime, moment.ISO_8601, true);
-                    if (endTime.isValid()) {
-                        entry.endTime = endTime;
-                    }
+                    entry.startTime = momentFromIso8601(entry.startTime);
+                    entry.endTime = momentFromIso8601(entry.endTime);
                 }
             }
         };
@@ -70,6 +63,6 @@
         init();
 
         return entryRepositoryService;
-    });
+    }]);
 
 })();

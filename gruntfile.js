@@ -62,6 +62,7 @@ module.exports = function (grunt) {
 
                         'js/src/common/module.js',
                         'js/src/common/momentInputDirective.js',
+                        'js/src/common/momentFromIso8601.js',
                         'js/src/timeTracker/module.js',
                         'js/src/timeTracker/entryRepositoryService.js',
                         'js/src/timeTracker/projectRepositoryService.js',
@@ -95,6 +96,7 @@ module.exports = function (grunt) {
 
                     'js/src/common/module.js',
                     'js/src/common/momentInputDirective.js',
+                    'js/src/common/momentFromIso8601.js',
                     'js/src/timeTracker/module.js',
                     'js/src/timeTracker/entryRepositoryService.js',
                     'js/src/timeTracker/projectRepositoryService.js',
@@ -114,6 +116,7 @@ module.exports = function (grunt) {
 
                     'js/src/common/module.js',
                     'js/src/common/momentInputDirective.js',
+                    'js/src/common/momentFromIso8601.js',
                     'js/src/timeTracker/module.js',
                     'js/src/timeTracker/entryRepositoryService.js',
                     'js/src/timeTracker/projectRepositoryService.js',

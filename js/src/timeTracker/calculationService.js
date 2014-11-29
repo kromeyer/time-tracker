@@ -42,18 +42,6 @@
 
         var calculationService = {};
 
-        calculationService.createProjectEntries = function (timeTrackerEntries) {
-            var projectEntries = [];
-            for (var index = 0; index < timeTrackerEntries.length; index++) {
-                var project = timeTrackerEntries[index].project;
-                if (projectEntries.indexOf(project) === -1) {
-                    projectEntries.push(project);
-                }
-            }
-            projectEntries.sort();
-            return projectEntries;
-        };
-
         calculationService.createTimeTrackerSummaryEntries = function (timeTrackerEntries) {
             var projectSummaryEntries = [];
             for (var index = 0; index < timeTrackerEntries.length; index++) {
