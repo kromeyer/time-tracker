@@ -4,12 +4,13 @@
     angular.module('timeTracker').controller('timeTrackerController', [
         '$scope',
         '$window',
+        '$timeout',
         '$interval',
         'timeTrackerEntryRepositoryService',
         'timeTrackerProjectRepositoryService',
         'timeTrackerCalculationService',
         'timeTrackerExportService',
-        function ($scope, $window, $interval, timeTrackerEntryRepository, timeTrackerProjectRepositoryService, timeTrackerCalculation, timeTrackerExportService) {
+        function ($scope, $window, $timeout, $interval, timeTrackerEntryRepository, timeTrackerProjectRepositoryService, timeTrackerCalculation, timeTrackerExportService) {
 
             var now = function () {
                 var now = moment();
@@ -76,8 +77,10 @@
                 $scope.timeTrackerSummaryDuration = timeTrackerCalculation.createTimeTrackerSummaryDuration($scope.timeTrackerEntries);
             };
 
-            $scope.calculateSummary();
-            $interval($scope.calculateSummary, 1000);
+            $timeout(function () {
+                $scope.calculateSummary();
+                $interval($scope.calculateSummary, 1000 * 60);
+            }, moment().endOf('minute').diff(moment()));
 
         }]);
 
