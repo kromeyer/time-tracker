@@ -37,7 +37,7 @@
             $scope.exportSummary = function () {
                 var data = timeTrackerExportService.summaryEntriesAsPlainText($scope.timeTrackerSummaryEntries);
                 var dataBase64 = $window.btoa(data);
-                var dataUrl = 'data:text/plain;charset="utf-8";base64,' + dataBase64;
+                var dataUrl = 'data:text/plain;base64,' + dataBase64;
                 $window.open(dataUrl);
             };
 
