@@ -5,4 +5,4 @@
 * `bower install`
 
 ## Build
-* `grunt`
+* `npm run grunt`
